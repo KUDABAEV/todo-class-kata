@@ -8,7 +8,11 @@ export default class Main extends React.Component {
     render() {
         return (
             <section className="main">
-                <TodoList todos={this.props.todos}  />
+                <TodoList
+                    todos={this.props.todos}
+                    onDeleteTodo={this.props.onDeleteTodo}
+                    onChangeDone={this.props.onChangeDone}
+                />
             </section>
         )
     }
