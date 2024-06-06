@@ -2,17 +2,38 @@ import React from "react";
 import Header from "../header";
 import Main from "../main";
 import Footer from "../footer";
+import {v1} from "uuid";
 import './todo-app.css';
 
 export default class TodoApp extends React.Component {
 
     state = {
         todoList: [
-            {id: 1, title: 'Terminator', isDone: false},
-            {id: 2, title: 'Spider man', isDone: false},
-            {id: 3, title: 'Batman', isDone: false},
-            {id: 4, title: 'Kick Ass', isDone: false},
-        ]
+            {id: v1(), title: 'Terminator', isDone: false},
+            {id: v1(), title: 'Spider man', isDone: false},
+            {id: v1(), title: 'Batman', isDone: false},
+            {id: v1(), title: 'Kick Ass', isDone: false},
+        ],
+        inputText: '',
+    }
+
+    onChangeInput = (e) => {
+        this.setState({
+            inputText: e.currentTarget.value,
+        })
+    }
+
+    addTodo = (text) => {
+        this.setState(({todoList}) => {
+            const newTodo = {id: v1(), title:text, isDone: false};
+            const newTodoList = [
+                newTodo,
+                ...todoList,
+            ]
+            return {
+                todoList: newTodoList,
+            }
+        })
     }
 
     onDeleteTodo = (id) => {
@@ -46,7 +67,11 @@ export default class TodoApp extends React.Component {
     render() {
         return (
             <section className="todoapp">
-                <Header/>
+                <Header
+                    addTodo={this.addTodo}
+                    inputChangeLabel={this.state.inputText}
+                    onChangeInput={this.onChangeInput}
+                />
                 <Main
                     todos={this.state.todoList}
                     onDeleteTodo={this.onDeleteTodo}
