@@ -9,17 +9,27 @@ export default class TodoApp extends React.Component {
 
     state = {
         todoList: [
-            {id: v1(), title: 'Terminator', isDone: false},
+            {id: v1(), title: 'Terminator', isDone: true},
             {id: v1(), title: 'Spider man', isDone: false},
             {id: v1(), title: 'Batman', isDone: false},
             {id: v1(), title: 'Kick Ass', isDone: false},
         ],
         inputText: '',
+        filters: 'all',
     }
 
-    onChangeInput = (e) => {
+    onDeleteCompletedTodos = () => {
+        this.setState(({todoList}) => {
+            let deleteTodoListCompleted = todoList.filter(f => f.isDone !== true);
+            return {
+                todoList: deleteTodoListCompleted,
+            }
+        })
+    }
+
+    onChangeInput = (value) => {
         this.setState({
-            inputText: e.currentTarget.value,
+            inputText: value,
         })
     }
 
@@ -64,20 +74,47 @@ export default class TodoApp extends React.Component {
         })
     }
 
+    changeFilterTodos = (filter) => {
+        this.setState(({filters}) =>{
+            return {
+                ...filters,
+                filters: filter
+            }
+        })
+    }
+
     render() {
+        let todos = this.state.todoList;
+        let filtersTodos = todos;
+        let filter = this.state.filters;
+
+        if (filter === 'completed') {
+            filtersTodos = todos.filter(f => f.isDone === true)
+        }
+
+        if (filter === 'active') {
+            filtersTodos = todos.filter(f => f.isDone === false)
+        }
+
         return (
             <section className="todoapp">
                 <Header
                     addTodo={this.addTodo}
                     inputChangeLabel={this.state.inputText}
                     onChangeInput={this.onChangeInput}
+                    onEmptyInput={this.onEmptyInput}
                 />
                 <Main
-                    todos={this.state.todoList}
+                    todos={filtersTodos}
                     onDeleteTodo={this.onDeleteTodo}
                     onChangeDone={this.onChangeDone}
                 />
-                <Footer/>
+                <Footer
+                    todos={filtersTodos}
+                    changeFilterTodos={this.changeFilterTodos}
+                    onDeleteCompletedTodos={this.onDeleteCompletedTodos}
+                    filter={filter}
+                />
             </section>
         );
     }

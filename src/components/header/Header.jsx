@@ -4,10 +4,11 @@ import './header.css';
 export default class Header extends React.Component{
 
     render() {
-        const {onChangeInput, addTodo, inputChangeLabel} = this.props;
+        const {onChangeInput, addTodo, inputChangeLabel, onEmptyInput} = this.props;
         const addTodoClick = () => {
             if (inputChangeLabel.trim() !== '') {
                 addTodo(inputChangeLabel)
+                onChangeInput('')
             }
         }
         const onKeyPressHandler = (e) => {
@@ -21,7 +22,7 @@ export default class Header extends React.Component{
                 <input
                     value={inputChangeLabel}
                     onKeyPress={onKeyPressHandler}
-                    onChange={onChangeInput}
+                    onChange={(e) => onChangeInput(e.currentTarget.value)}
                     className="new-todo"
                     type="text"
                     placeholder="What needs to be done?"
