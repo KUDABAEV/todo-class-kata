@@ -15,7 +15,20 @@ export default class TodoApp extends React.Component {
             {id: v1(), title: 'Kick Ass', isDone: false},
         ],
         inputText: '',
+        editText: '',
         filters: 'all',
+    }
+
+    onEditTodo = (id, newTitle) => {
+        this.setState(({todoList}) => {
+            const newTodoList = todoList.map(todo => {
+                return todo.id === id ? {...todo, title: newTitle} : todo
+            })
+
+            return {
+                todoList: newTodoList,
+            }
+        })
     }
 
     onDeleteCompletedTodos = () => {
@@ -24,6 +37,12 @@ export default class TodoApp extends React.Component {
             return {
                 todoList: deleteTodoListCompleted,
             }
+        })
+    }
+
+    onChangeEditInput = (value) => {
+        this.setState({
+            editText: value,
         })
     }
 
@@ -105,6 +124,9 @@ export default class TodoApp extends React.Component {
                     onEmptyInput={this.onEmptyInput}
                 />
                 <Main
+                    inputChangeEditLabel={this.state.editText}
+                    onChangeEditInput={this.onChangeEditInput}
+                    onEditTodo={this.onEditTodo}
                     todos={filtersTodos}
                     onDeleteTodo={this.onDeleteTodo}
                     onChangeDone={this.onChangeDone}

@@ -9,6 +9,9 @@ export default class Main extends React.Component {
         return (
             <section className="main">
                 <TodoList
+                    inputChangeEditLabel={this.props.inputChangeEditLabel}
+                    onChangeEditInput={this.props.onChangeEditInput}
+                    onEditTodo={this.props.onEditTodo}
                     todos={this.props.todos}
                     onDeleteTodo={this.props.onDeleteTodo}
                     onChangeDone={this.props.onChangeDone}

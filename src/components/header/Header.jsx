@@ -4,7 +4,7 @@ import './header.css';
 export default class Header extends React.Component{
 
     render() {
-        const {onChangeInput, addTodo, inputChangeLabel, onEmptyInput} = this.props;
+        const {onChangeInput, addTodo, inputChangeLabel} = this.props;
         const addTodoClick = () => {
             if (inputChangeLabel.trim() !== '') {
                 addTodo(inputChangeLabel)
