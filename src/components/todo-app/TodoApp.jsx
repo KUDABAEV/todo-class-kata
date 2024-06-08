@@ -9,10 +9,10 @@ export default class TodoApp extends React.Component {
 
     state = {
         todoList: [
-            {id: v1(), title: 'Terminator', isDone: true},
-            {id: v1(), title: 'Spider man', isDone: false},
-            {id: v1(), title: 'Batman', isDone: false},
-            {id: v1(), title: 'Kick Ass', isDone: false},
+            {id: v1(), title: 'Terminator', isDone: true,created: new Date(2024, 5, 8, 18)},
+            {id: v1(), title: 'Spider man', isDone: false,created: new Date(2024, 5, 8, 19)},
+            {id: v1(), title: 'Batman', isDone: false,created: new Date()},
+            {id: v1(), title: 'Kick Ass', isDone: false,created: new Date()},
         ],
         inputText: '',
         editText: '',
@@ -54,7 +54,7 @@ export default class TodoApp extends React.Component {
 
     addTodo = (text) => {
         this.setState(({todoList}) => {
-            const newTodo = {id: v1(), title:text, isDone: false};
+            const newTodo = {id: v1(), title:text, isDone: false,created: new Date()};
             const newTodoList = [
                 newTodo,
                 ...todoList,

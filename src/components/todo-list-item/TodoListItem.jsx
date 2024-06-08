@@ -19,6 +19,7 @@ export default class TodoListItem extends React.Component {
         const {
             id,
             title,
+            created,
             isDone,
             onDeleteTodo,
             onChangeDone,
@@ -48,11 +49,11 @@ export default class TodoListItem extends React.Component {
                 {
                     editMode
                         ? <input className="edit-input"
-                            value={inputChangeEditLabel}
-                            type="text"
-                            placeholder="Edit"
-                            onChange={(e) => onChangeEditInput(e.currentTarget.value)}
-                            onKeyPress={onKeyPressHandler}
+                                 value={inputChangeEditLabel}
+                                 type="text"
+                                 placeholder="Edit"
+                                 onChange={(e) => onChangeEditInput(e.currentTarget.value)}
+                                 onKeyPress={onKeyPressHandler}
                         />
                         : <li className={completed}>
                             <div className="view">
@@ -63,11 +64,11 @@ export default class TodoListItem extends React.Component {
                                     onChange={() => onChangeDone(id)}/>
                                 <label>
                                     <span onClick={() => onChangeDone(id)} className="description">{title}</span>
-                                    <span className="created">created 17 seconds ago</span>
+                                    <span className="created">data</span>
                                 </label>
                                 <button
                                     className="icon icon-edit"
-                                    onClick={() =>this.changeEditMode()}
+                                    onClick={() => this.changeEditMode()}
                                 ></button>
                                 <button
                                     className="icon icon-destroy"
