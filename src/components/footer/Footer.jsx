@@ -1,5 +1,6 @@
 import React from 'react';
 import './footer.css';
+import * as Proptypes from "prop-types";
 
 export default class Footer extends React.Component{
 
@@ -10,6 +11,12 @@ export default class Footer extends React.Component{
 
         ],
         filter: '',
+    }
+    static propTypes = {
+        changeFilterTodos: Proptypes.func,
+        onDeleteCompletedTodos: Proptypes.func,
+        todos: Proptypes.arrayOf(Proptypes.object).isRequired,
+        filter: Proptypes.string.isRequired,
     }
 
     render() {

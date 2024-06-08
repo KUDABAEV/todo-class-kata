@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Proptypes from "prop-types";
 import './header.css';
 
 export default class Header extends React.Component{
@@ -7,6 +8,12 @@ export default class Header extends React.Component{
         inputChangeLabel: 'edit todo',
         addTodo: () => {},
         onChangeInput: () => {},
+    }
+
+    static propTypes = {
+        inputChangeLabel: Proptypes.string.isRequired,
+        addTodo: Proptypes.func,
+        onChangeInput: Proptypes.func,
     }
 
     state = {
