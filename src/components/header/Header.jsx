@@ -3,6 +3,12 @@ import './header.css';
 
 export default class Header extends React.Component{
 
+    static defaultProps = {
+        inputChangeLabel: 'edit todo',
+        addTodo: () => {},
+        onChangeInput: () => {},
+    }
+
     state = {
         error: null,
     }

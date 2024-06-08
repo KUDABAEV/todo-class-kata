@@ -3,6 +3,15 @@ import './footer.css';
 
 export default class Footer extends React.Component{
 
+    static defaultProps = {
+        changeFilterTodos: () => {},
+        onDeleteCompletedTodos: () => {},
+        todos: [
+
+        ],
+        filter: '',
+    }
+
     render() {
         const {todos,changeFilterTodos, onDeleteCompletedTodos, filter} = this.props;
         const countTodosActive = todos.filter(f => f.isDone === false).length;

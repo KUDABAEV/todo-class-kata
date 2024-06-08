@@ -121,7 +121,6 @@ export default class TodoApp extends React.Component {
                     addTodo={this.addTodo}
                     inputChangeLabel={this.state.inputText}
                     onChangeInput={this.onChangeInput}
-                    onEmptyInput={this.onEmptyInput}
                 />
                 <Main
                     inputChangeEditLabel={this.state.editText}

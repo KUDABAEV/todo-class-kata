@@ -5,6 +5,17 @@ import './main.css';
 
 export default class Main extends React.Component {
 
+    static defaultProps = {
+        inputChangeEditLabel: 'add todo',
+        onChangeEditInput: () => {},
+        onEditTodo: () => {},
+        todos: [
+
+        ],
+        onDeleteTodo: () => {},
+        onChangeDone: () => {},
+    }
+
     render() {
         return (
             <section className="main">
