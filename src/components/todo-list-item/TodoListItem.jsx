@@ -1,4 +1,5 @@
 import React from 'react';
+import {formatDistanceToNow} from 'date-fns'
 import './todo-list-item.css';
 
 export default class TodoListItem extends React.Component {
@@ -64,7 +65,10 @@ export default class TodoListItem extends React.Component {
                                     onChange={() => onChangeDone(id)}/>
                                 <label>
                                     <span onClick={() => onChangeDone(id)} className="description">{title}</span>
-                                    <span className="created">data</span>
+                                    <span className="created">{`created ${formatDistanceToNow(created, {
+                                        includeSeconds: true,
+                                        addSuffix: true
+                                    })}`}</span>
                                 </label>
                                 <button
                                     className="icon icon-edit"
