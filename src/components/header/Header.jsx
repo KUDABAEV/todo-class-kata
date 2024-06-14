@@ -3,6 +3,11 @@ import * as Proptypes from 'prop-types';
 import './header.css';
 
 export default class Header extends React.Component {
+	constructor(props) {
+		super(props);
+		this.inputRef = React.createRef();
+	}
+
 	static defaultProps = {
 		inputChangeLabel: 'edit todo',
 		addTodo: () => {},
@@ -28,6 +33,10 @@ export default class Header extends React.Component {
 			};
 		});
 	};
+
+	componentDidMount() {
+		this.inputRef.current.focus();
+	}
 
 	render() {
 		const { onChangeInput, addTodo, inputChangeLabel } = this.props;
@@ -60,7 +69,7 @@ export default class Header extends React.Component {
 					className={classError}
 					type="text"
 					placeholder="What needs to be done?"
-					autoFocus
+					ref={this.inputRef}
 				/>
 				{error && <div className="error">Поле не должно быть пустым</div>}
 			</header>

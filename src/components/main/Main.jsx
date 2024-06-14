@@ -1,7 +1,7 @@
-import React from 'react';
-import TodoList from '../todo-list';
-import './main.css';
 import * as Proptypes from 'prop-types';
+import React from 'react';
+import './main.css';
+import TodoList from '../todo-list';
 
 export default class Main extends React.Component {
 	static defaultProps = {
@@ -12,6 +12,7 @@ export default class Main extends React.Component {
 		onDeleteTodo: () => {},
 		onChangeDone: () => {},
 	};
+
 	static propTypes = {
 		inputChangeEditLabel: Proptypes.string.isRequired,
 		onChangeEditInput: Proptypes.func,

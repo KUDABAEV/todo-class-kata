@@ -1,8 +1,8 @@
+import { v1 } from 'uuid';
 import React from 'react';
 import Header from '../header';
 import Main from '../main';
 import Footer from '../footer';
-import { v1 } from 'uuid';
 import './todo-app.css';
 
 export default class TodoApp extends React.Component {
@@ -32,7 +32,7 @@ export default class TodoApp extends React.Component {
 
 	onDeleteCompletedTodos = () => {
 		this.setState(({ todoList }) => {
-			let deleteTodoListCompleted = todoList.filter((f) => f.isDone !== true);
+			const deleteTodoListCompleted = todoList.filter((f) => f.isDone !== true);
 			return {
 				todoList: deleteTodoListCompleted,
 			};
@@ -95,9 +95,9 @@ export default class TodoApp extends React.Component {
 	};
 
 	render() {
-		let todos = this.state.todoList;
+		const todos = this.state.todoList;
 		let filtersTodos = todos;
-		let filter = this.state.filters;
+		const filter = this.state.filters;
 
 		if (filter === 'completed') {
 			filtersTodos = todos.filter((f) => f.isDone === true);
