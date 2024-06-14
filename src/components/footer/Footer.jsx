@@ -9,6 +9,7 @@ export default class Footer extends React.Component {
 		todos: [],
 		filter: '',
 	};
+
 	static propTypes = {
 		changeFilterTodos: Proptypes.func,
 		onDeleteCompletedTodos: Proptypes.func,
