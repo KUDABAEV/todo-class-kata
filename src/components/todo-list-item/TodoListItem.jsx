@@ -30,9 +30,9 @@ export default class TodoListItem extends React.Component {
     } = this.props;
 
     const onKeyPressHandler = (e) => {
-      if (e.charCode === 13) {
-        if (inputChangeEditLabel !== '') {
-          onEditTodo(id, inputChangeEditLabel);
+      if (e.code === 'Enter') {
+        if (e.target.value.length) {
+          onEditTodo(id, e.target.value);
           this.changeEditMode();
           onChangeEditInput('');
         }
@@ -50,11 +50,11 @@ export default class TodoListItem extends React.Component {
         {editMode ? (
           <input
             className="edit-input"
-            value={inputChangeEditLabel}
+            defaultValue={title}
             type="text"
             placeholder="Edit"
             onChange={(e) => onChangeEditInput(e.currentTarget.value)}
-            onKeyPress={onKeyPressHandler}
+            onKeyDown={onKeyPressHandler}
           />
         ) : (
           <li className={`view ${completed}`}>
