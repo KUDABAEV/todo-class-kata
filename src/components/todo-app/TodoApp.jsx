@@ -111,7 +111,6 @@ export default class TodoApp extends React.Component {
       <section className="todoapp">
         <Header addTodo={this.addTodo} inputChangeLabel={this.state.inputText} onChangeInput={this.onChangeInput} />
         <Main
-          inputChangeEditLabel={this.state.editText}
           onChangeEditInput={this.onChangeEditInput}
           onEditTodo={this.onEditTodo}
           todos={filtersTodos}

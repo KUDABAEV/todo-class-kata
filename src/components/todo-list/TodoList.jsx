@@ -9,7 +9,6 @@ export default class TodoList extends React.Component {
     const elementsTodos = todos.map((item) => {
       return (
         <TodoListItem
-          inputChangeEditLabel={this.props.inputChangeEditLabel}
           onChangeEditInput={this.props.onChangeEditInput}
           onEditTodo={this.props.onEditTodo}
           key={item.id}

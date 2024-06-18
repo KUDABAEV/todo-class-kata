@@ -17,17 +17,7 @@ export default class TodoListItem extends React.Component {
 
   render() {
     const { editMode } = this.state;
-    const {
-      id,
-      title,
-      created,
-      isDone,
-      onDeleteTodo,
-      onChangeDone,
-      onEditTodo,
-      inputChangeEditLabel,
-      onChangeEditInput,
-    } = this.props;
+    const { id, title, created, isDone, onDeleteTodo, onChangeDone, onEditTodo, onChangeEditInput } = this.props;
 
     const onKeyPressHandler = (e) => {
       if (e.code === 'Enter') {

@@ -5,7 +5,6 @@ import TodoList from '../todo-list';
 
 export default class Main extends React.Component {
   static defaultProps = {
-    inputChangeEditLabel: 'add todo',
     onChangeEditInput: () => {},
     onEditTodo: () => {},
     todos: [],
@@ -14,7 +13,6 @@ export default class Main extends React.Component {
   };
 
   static propTypes = {
-    inputChangeEditLabel: Proptypes.string.isRequired,
     onChangeEditInput: Proptypes.func,
     onEditTodo: Proptypes.func,
     todos: Proptypes.arrayOf(Proptypes.object).isRequired,
@@ -26,7 +24,6 @@ export default class Main extends React.Component {
     return (
       <section className="main">
         <TodoList
-          inputChangeEditLabel={this.props.inputChangeEditLabel}
           onChangeEditInput={this.props.onChangeEditInput}
           onEditTodo={this.props.onEditTodo}
           todos={this.props.todos}
