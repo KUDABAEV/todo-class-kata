@@ -47,3 +47,10 @@
 .edit-input::placeholder {
   color: red;
 }
+.created {
+  font-size: 13px;
+  color: gray;
+}
+.timer {
+  margin-left: 4px;
+}

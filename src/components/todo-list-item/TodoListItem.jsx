@@ -1,11 +1,28 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import './todo-list-item.css';
+import Toggle from '../toggle';
 
 export default class TodoListItem extends React.Component {
-  state = {
-    editMode: false,
-  };
+  constructor() {
+    super();
+    this.state = { minute: 0, second: 0, editMode: false };
+    this.updateTimer = this.updateTimer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
+  }
+
+  updateTimer() {
+    this.setState((state) => {
+      return {
+        second: state.second === 59 ? 0 : state.second + 1,
+        minute: state.second === 59 ? state.minute + 1 : state.minute,
+      };
+    });
+  }
+
+  resetTimer() {
+    this.setState({ minute: 0, second: 0 });
+  }
 
   changeEditMode = () => {
     this.setState(({ editMode }) => {
@@ -50,9 +67,15 @@ export default class TodoListItem extends React.Component {
           <li className={`view ${completed}`}>
             <input className="toggle" type="checkbox" checked={isDone} onChange={() => onChangeDone(id)} />
             <label>
-              <button onClick={() => onChangeDone(id)} className="description">
+              <button onClick={() => onChangeDone(id)} className="title">
                 {title}
               </button>
+              <Toggle
+                minute={this.state.minute}
+                second={this.state.second}
+                updateTimer={this.updateTimer}
+                resetTimer={this.resetTimer}
+              />
               <span className="created">{`created ${formatDistanceToNow(created, {
                 includeSeconds: true,
                 addSuffix: true,
