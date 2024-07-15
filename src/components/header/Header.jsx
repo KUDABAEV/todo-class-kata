@@ -60,7 +60,7 @@ export default class Header extends React.Component {
       classError += ' error-border';
     }
     return (
-      <header className="header">
+      <headerg className="header">
         <h1>todos</h1>
         <div className="input-box">
           <input
@@ -76,7 +76,7 @@ export default class Header extends React.Component {
           <input className="input-sec" type="text" placeholder={0} />
         </div>
         {error && <div className="error">Поле не должно быть пустым</div>}
-      </header>
+      </headerg>
     );
   }
 }
