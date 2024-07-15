@@ -62,15 +62,19 @@ export default class Header extends React.Component {
     return (
       <header className="header">
         <h1>todos</h1>
-        <input
-          value={inputChangeLabel}
-          onKeyPress={onKeyPressHandler}
-          onChange={(e) => onChangeInput(e.currentTarget.value)}
-          className={classError}
-          type="text"
-          placeholder="What needs to be done?"
-          ref={this.inputRef}
-        />
+        <div className="input-box">
+          <input
+            value={inputChangeLabel}
+            onKeyPress={onKeyPressHandler}
+            onChange={(e) => onChangeInput(e.currentTarget.value)}
+            className={classError}
+            type="text"
+            placeholder="What needs to be done?"
+            ref={this.inputRef}
+          />
+          <input className="input-min" type="text" placeholder={0} />
+          <input className="input-sec" type="text" placeholder={0} />
+        </div>
         {error && <div className="error">Поле не должно быть пустым</div>}
       </header>
     );
