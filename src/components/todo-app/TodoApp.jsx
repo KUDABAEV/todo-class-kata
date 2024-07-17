@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoNew from '../todo-new/TodoNew';
 import TodoItem from '../todo-item';
+import TodoControls from '../todo-controls';
 
 import TODOS_LIST_DEFAULT from './todoData';
 import styles from './TodoApp.module.css';
@@ -12,9 +13,12 @@ const RenderTodoApp = ({ todoList = [] }) => {
 
       <div className={styles.todoApp_box}>
         <TodoNew />
+
         {todoList.map((todo) => (
           <TodoItem key={todo.id} {...todo} />
         ))}
+
+        <TodoControls />
       </div>
     </div>
   );
