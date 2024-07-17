@@ -1,0 +1,48 @@
+.icon {
+  width: 30px;
+  height: 40px;
+  margin: auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 34px;
+  color: #cc9a9a;
+  transition: color 0.2s ease-out;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #af5b5e;
+}
+
+.icon__edit {
+  font-size: 18px;
+}
+.icon__destroy {
+  font-size: 28px;
+}
+
+.icon__destroy:after {
+  content: '×';
+}
+
+.icon__edit:after {
+  content: '✎';
+}
+
+.icon__pause {
+  font-size: 18px;
+}
+
+.icon__play {
+  font-size: 15px;
+}
+
+.icon__pause:after {
+  content: '⏸';
+}
+
+.icon__play:after {
+  content: '▶';
+}
