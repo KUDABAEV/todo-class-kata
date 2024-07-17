@@ -39,3 +39,14 @@
 .controls__btn {
   display: flex;
 }
+
+.inputEdit {
+  flex: 1 1 auto;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: 24px;
+  margin-left: 55px;
+  border: none;
+  display: block;
+  transition: all 0.3s;
+}

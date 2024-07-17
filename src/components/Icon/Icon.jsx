@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './Icon.module.css';
 
-const Icon = ({ type = 'edit' }) => {
+const Icon = ({ type = 'edit', onClick }) => {
   return (
     <button
       className={clsx(styles.icon, {
@@ -11,7 +11,8 @@ const Icon = ({ type = 'edit' }) => {
         [styles.icon__pause]: type === 'pause',
         [styles.icon__play]: type === 'play',
       })}
-    ></button>
+      onClick={onClick}
+    />
   );
 };
 
