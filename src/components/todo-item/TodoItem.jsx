@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { formatDistanceToNow } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 
 import CheckBox from '../check-box';
 import styles from './TodoItem.module.css';
@@ -51,13 +51,25 @@ export default class TodoItem extends React.Component {
     isRanTimer: false,
     editTitle: this.props.title,
 
-    created: `created ${formatDistanceToNow(this.props.created, {
-      includeSeconds: true,
-      addSuffix: true,
-    })}`,
-
     inputTitleRef: React.createRef(null),
   };
+
+  get formattedCreatedTime() {
+    const formattedTime = formatDistanceToNow(this.props.created, {
+      includeSeconds: true,
+      addSuffix: true,
+    });
+
+    return `created ${formattedTime}`;
+  }
+
+  get formattedTime() {
+    const formattedTime = new Date();
+    formattedTime.setMinutes(Math.floor(this.props.time / 60));
+    formattedTime.setSeconds(this.props.time % 60);
+
+    return format(formattedTime, 'mm:ss');
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.editMode) {
@@ -103,8 +115,8 @@ export default class TodoItem extends React.Component {
         isRanTimer={this.state.isRanTimer}
         title={this.props.title}
         isDone={this.props.isDone}
-        time={this.props.time}
-        created={this.state.created}
+        time={this.formattedTime}
+        created={this.formattedCreatedTime}
         deleteTodo={() => this.props.deleteTodo(this.props.id)}
         toggleDone={() => this.props.toggleDone(this.props.id)}
         toggleEditMode={this.toggleEditMode}

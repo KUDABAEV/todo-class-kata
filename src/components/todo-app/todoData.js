@@ -12,28 +12,28 @@ const TODOS_LIST_DATA = [
     title: 'Terminator',
     isDone: true,
     created: new Date(2024, 5, 8, 18),
-    time: '00:30',
+    time: 30,
   },
 
   {
     title: 'Spider man',
     isDone: false,
     created: new Date(2024, 5, 8, 19),
-    time: '01:30',
+    time: 90,
   },
 
   {
     title: 'Batman',
     isDone: false,
     created: new Date(),
-    time: '02:30',
+    time: 150,
   },
 
   {
     title: 'Kick Ass',
     isDone: false,
     created: new Date(),
-    time: '03:30',
+    time: 210,
   },
 ];
 

@@ -3,9 +3,8 @@ import TodoNew from '../todo-new/TodoNew';
 import TodoItem from '../todo-item';
 import TodoControls from '../todo-controls';
 
-import { TODOS_LIST_DEFAULT, TODOS_LIST_FILTERS } from './todoData';
+import { filterTodo, getInitState, saveState } from './todoUtils';
 import styles from './TodoApp.module.css';
-import { filterTodo } from './todoUtils';
 
 const RenderTodoApp = ({
   todoList = [],
@@ -47,11 +46,7 @@ const RenderTodoApp = ({
 };
 
 export default class TodoApp extends React.Component {
-  state = {
-    todoList: TODOS_LIST_DEFAULT,
-    todoListFilter: [],
-    filter: TODOS_LIST_FILTERS.all,
-  };
+  state = getInitState();
 
   componentDidMount() {
     this.setState({
@@ -60,6 +55,8 @@ export default class TodoApp extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    saveState(this.state);
+
     if (this.state.filter !== prevState.filter || this.state.todoList !== prevState.todoList) {
       this.setState({
         todoListFilter: filterTodo(this.state.todoList, this.state.filter),
@@ -89,7 +86,7 @@ export default class TodoApp extends React.Component {
 
   addTodo = (newTodo) => {
     this.setState((prevState) => {
-      const todoList = [...prevState.todoList, newTodo];
+      const todoList = [newTodo, ...prevState.todoList];
 
       return { todoList };
     });
