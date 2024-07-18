@@ -1,5 +1,12 @@
 import { v1 } from 'uuid';
 
+export const TODOS_LIST_FILTERS = {
+  all: 'ALL',
+  done: 'DONE',
+  active: 'ACTIVE',
+  completed: 'COMPLETED',
+};
+
 const TODOS_LIST_DATA = [
   {
     title: 'Terminator',
@@ -30,9 +37,7 @@ const TODOS_LIST_DATA = [
   },
 ];
 
-const TODOS_LIST_DEFAULT = TODOS_LIST_DATA.map((todo) => ({
+export const TODOS_LIST_DEFAULT = TODOS_LIST_DATA.map((todo) => ({
   ...todo,
   id: v1(),
 }));
-
-export default TODOS_LIST_DEFAULT;

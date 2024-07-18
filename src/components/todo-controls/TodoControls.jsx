@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
+import { TODOS_LIST_FILTERS } from '../todo-app/todoData';
 import styles from './TodoControls.module.css';
 
 const RenderFilterItem = ({ filter, onClick, isActive }) => {
@@ -16,18 +17,32 @@ const RenderFilterItem = ({ filter, onClick, isActive }) => {
   );
 };
 
-const TodoControls = ({}) => {
+const TodoControls = ({ changeFilterTodo, filter, deleteCompletedTodo, countLeft }) => {
   return (
     <div className={styles.box}>
-      <span>0 items left</span>
+      <span>{countLeft} items left</span>
 
       <ul className={styles.filters}>
-        <RenderFilterItem isActive={true} filter="All" onClick={() => {}} />
-        <RenderFilterItem filter="Active" onClick={() => {}} />
-        <RenderFilterItem filter="Completed" onClick={() => {}} />
+        <RenderFilterItem
+          isActive={filter === TODOS_LIST_FILTERS.all}
+          filter="All"
+          onClick={() => changeFilterTodo(TODOS_LIST_FILTERS.all)}
+        />
+        <RenderFilterItem
+          filter="Active"
+          isActive={filter === TODOS_LIST_FILTERS.active}
+          onClick={() => changeFilterTodo(TODOS_LIST_FILTERS.active)}
+        />
+        <RenderFilterItem
+          filter="Completed"
+          isActive={filter === TODOS_LIST_FILTERS.completed}
+          onClick={() => changeFilterTodo(TODOS_LIST_FILTERS.completed)}
+        />
       </ul>
 
-      <button className={styles.clearCompleted}>Clear completed</button>
+      <button className={styles.clearCompleted} onClick={deleteCompletedTodo}>
+        Clear completed
+      </button>
     </div>
   );
 };

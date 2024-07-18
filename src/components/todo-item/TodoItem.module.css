@@ -5,6 +5,9 @@
   justify-content: space-between;
 }
 
+.item__completed {
+}
+
 .label {
   flex: 1 1 auto;
   display: flex;
@@ -21,6 +24,11 @@
   color: #4d4d4d;
 }
 
+.item__completed .title {
+  color: #cdcdcd;
+  text-decoration: line-through;
+}
+
 .controls {
   display: flex;
   align-items: center;
@@ -28,6 +36,7 @@
 }
 
 .timer {
+  min-width: 65px;
   display: flex;
   align-items: center;
 }
@@ -49,4 +58,16 @@
   border: none;
   display: block;
   transition: all 0.3s;
+}
+
+@media (max-width: 720px) {
+  .item {
+    flex-wrap: wrap;
+  }
+
+  .controls {
+    padding-left: 45px;
+    flex-basis: 100%;
+    justify-content: space-between;
+  }
 }

@@ -1,4 +1,5 @@
 import { v1 } from 'uuid';
+import { TODOS_LIST_FILTERS } from './todoData';
 
 export const createTodo = ({ title, min, sec }) => {
   return {
@@ -10,4 +11,16 @@ export const createTodo = ({ title, min, sec }) => {
   };
 };
 
-export const createTodo2 = () => {};
+export const filterTodo = (list, filter) => {
+  if (filter === TODOS_LIST_FILTERS.all) return list;
+
+  if (filter === TODOS_LIST_FILTERS.active) {
+    return list.filter((todo) => !todo.isDone);
+  }
+
+  if (filter === TODOS_LIST_FILTERS.completed) {
+    return list.filter((todo) => todo.isDone);
+  }
+
+  throw new Error('Invalid filter');
+};

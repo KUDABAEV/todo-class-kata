@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import styles from './TodoNew.module.css';
 import { createTodo } from '../todo-app/todoUtils';
 
-const RenderTodoNew = ({ title, min, sec, changeMin, changeSec, changeTitle, addTodo, error }) => {
+const RenderTodoNew = ({ title, min, sec, changeMin, changeSec, changeTitle, addTodo, error, inputTitleRef }) => {
   return (
     <div>
       <button
@@ -15,6 +15,7 @@ const RenderTodoNew = ({ title, min, sec, changeMin, changeSec, changeTitle, add
       >
         <input
           className={styles.input_name}
+          ref={inputTitleRef}
           value={title}
           onChange={(event) => changeTitle(event.target.value)}
           type="text"
@@ -44,12 +45,19 @@ export default class TodoNew extends React.Component {
   state = {
     error: null,
     title: '',
+    inputTitleRef: React.createRef(null),
 
     timer: {
       min: '',
       sec: '',
     },
   };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.state.inputTitleRef.current.focus();
+    }, 0);
+  }
 
   changeTitle = (newTitle) => {
     this.setState(({ title }) => ({
@@ -119,6 +127,7 @@ export default class TodoNew extends React.Component {
         changeTitle={this.changeTitle}
         addTodo={this.addHandler}
         error={this.state.error}
+        inputTitleRef={this.state.inputTitleRef}
       />
     );
   }

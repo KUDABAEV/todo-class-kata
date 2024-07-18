@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { formatDistanceToNow } from 'date-fns';
 
 import CheckBox from '../check-box';
@@ -7,7 +8,7 @@ import Icon from '../Icon/Icon';
 
 const RenderTodoItemView = ({ title, isDone, isRanTimer, time, created, deleteTodo, toggleDone, toggleEditMode }) => {
   return (
-    <li className={styles.item}>
+    <li className={clsx(styles.item, { [styles.item__completed]: isDone })}>
       <button className={styles.label} onClick={toggleDone}>
         <CheckBox checked={isDone} onChange={toggleDone} />
         <h3 className={styles.title}>{title}</h3>
@@ -28,11 +29,12 @@ const RenderTodoItemView = ({ title, isDone, isRanTimer, time, created, deleteTo
   );
 };
 
-const RenderTodoItemEdit = ({ title, changeNewTitle, toggleEditMode }) => {
+const RenderTodoItemEdit = ({ title, changeNewTitle, toggleEditMode, inputTitleRef }) => {
   return (
-    <li className={styles.item}>
+    <li className={styles.item} onKeyUp={(e) => (e.code === 'Enter' ? toggleEditMode() : null)}>
       <input
         className={styles.inputEdit}
+        ref={inputTitleRef}
         value={title}
         onChange={(event) => changeNewTitle(event.target.value)}
         type="text"
@@ -53,7 +55,17 @@ export default class TodoItem extends React.Component {
       includeSeconds: true,
       addSuffix: true,
     })}`,
+
+    inputTitleRef: React.createRef(null),
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.editMode) {
+      setTimeout(() => {
+        this.state.inputTitleRef.current.focus();
+      }, 0);
+    }
+  }
 
   changeNewTitle = (newTitle) => {
     this.setState(({ editTitle }) => {
@@ -84,6 +96,7 @@ export default class TodoItem extends React.Component {
         title={this.state.editTitle}
         changeNewTitle={this.changeNewTitle}
         toggleEditMode={this.handlerSaveNewTitle}
+        inputTitleRef={this.state.inputTitleRef}
       />
     ) : (
       <RenderTodoItemView

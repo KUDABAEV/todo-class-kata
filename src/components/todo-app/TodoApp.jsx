@@ -3,10 +3,21 @@ import TodoNew from '../todo-new/TodoNew';
 import TodoItem from '../todo-item';
 import TodoControls from '../todo-controls';
 
-import TODOS_LIST_DEFAULT from './todoData';
+import { TODOS_LIST_DEFAULT, TODOS_LIST_FILTERS } from './todoData';
 import styles from './TodoApp.module.css';
+import { filterTodo } from './todoUtils';
 
-const RenderTodoApp = ({ todoList = [], deleteTodo, addTodo, changeTodoTitle, toggleDone }) => {
+const RenderTodoApp = ({
+  todoList = [],
+  deleteTodo,
+  deleteCompletedTodo,
+  addTodo,
+  changeTodoTitle,
+  toggleDone,
+  changeFilterTodo,
+  filter,
+  countLeft,
+}) => {
   return (
     <div className={styles.todoApp}>
       <h1 className={styles.todoApp_title}>todos</h1>
@@ -24,7 +35,12 @@ const RenderTodoApp = ({ todoList = [], deleteTodo, addTodo, changeTodoTitle, to
           />
         ))}
 
-        <TodoControls />
+        <TodoControls
+          changeFilterTodo={changeFilterTodo}
+          filter={filter}
+          deleteCompletedTodo={deleteCompletedTodo}
+          countLeft={countLeft}
+        />
       </div>
     </div>
   );
@@ -33,12 +49,39 @@ const RenderTodoApp = ({ todoList = [], deleteTodo, addTodo, changeTodoTitle, to
 export default class TodoApp extends React.Component {
   state = {
     todoList: TODOS_LIST_DEFAULT,
-    filters: 'all',
+    todoListFilter: [],
+    filter: TODOS_LIST_FILTERS.all,
   };
+
+  componentDidMount() {
+    this.setState({
+      todoListFilter: filterTodo(this.state.todoList, this.state.filter),
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.filter !== prevState.filter || this.state.todoList !== prevState.todoList) {
+      this.setState({
+        todoListFilter: filterTodo(this.state.todoList, this.state.filter),
+      });
+    }
+  }
+
+  get countLeft() {
+    return this.state.todoListFilter.filter((todo) => !todo.isDone).length;
+  }
 
   deleteTodo = (id) => {
     this.setState((prevState) => {
       const todoList = prevState.todoList.filter((todo) => todo.id !== id);
+
+      return { todoList };
+    });
+  };
+
+  deleteCompletedTodo = () => {
+    this.setState((prevState) => {
+      const todoList = prevState.todoList.filter((todo) => !todo.isDone);
 
       return { todoList };
     });
@@ -84,14 +127,22 @@ export default class TodoApp extends React.Component {
     });
   };
 
+  changeFilterTodo = (filter) => {
+    this.setState({ filter });
+  };
+
   render() {
     return (
       <RenderTodoApp
-        todoList={this.state.todoList}
+        todoList={this.state.todoListFilter}
         deleteTodo={this.deleteTodo}
+        deleteCompletedTodo={this.deleteCompletedTodo}
         addTodo={this.addTodo}
         changeTodoTitle={this.changeTodoTitle}
         toggleDone={this.toggleDone}
+        changeFilterTodo={this.changeFilterTodo}
+        filter={this.state.filter}
+        countLeft={this.countLeft}
       />
     );
   }
