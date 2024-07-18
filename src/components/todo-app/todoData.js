@@ -12,7 +12,6 @@ const TODOS_LIST_DATA = [
     title: 'Terminator',
     created: new Date(2024, 5, 8, 18),
     timeSecond: 30,
-    isDone: true,
   },
 
   {
@@ -31,7 +30,7 @@ const TODOS_LIST_DATA = [
     title: 'Kick Ass',
     created: new Date(),
     timeSecond: 210,
-    isTimerRun: true,
+    isTimerRun: false,
   },
 ];
 
