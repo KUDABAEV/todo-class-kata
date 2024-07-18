@@ -9,7 +9,8 @@ export const createTodo = ({ title, min, sec }) => {
     title,
     isDone: false,
     created: new Date(),
-    time: totalSeconds,
+    timeSecond: totalSeconds,
+    isTimerRun: false,
   };
 };
 

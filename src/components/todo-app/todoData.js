@@ -10,34 +10,34 @@ export const TODOS_LIST_FILTERS = {
 const TODOS_LIST_DATA = [
   {
     title: 'Terminator',
-    isDone: true,
     created: new Date(2024, 5, 8, 18),
-    time: 30,
+    timeSecond: 30,
+    isDone: true,
   },
 
   {
     title: 'Spider man',
-    isDone: false,
     created: new Date(2024, 5, 8, 19),
-    time: 90,
+    timeSecond: 90,
   },
 
   {
     title: 'Batman',
-    isDone: false,
     created: new Date(),
-    time: 150,
+    timeSecond: 150,
   },
 
   {
     title: 'Kick Ass',
-    isDone: false,
     created: new Date(),
-    time: 210,
+    timeSecond: 210,
+    isTimerRun: true,
   },
 ];
 
 export const TODOS_LIST_DEFAULT = TODOS_LIST_DATA.map((todo) => ({
-  ...todo,
+  isDone: false,
+  isTimerRun: false,
   id: v1(),
+  ...todo,
 }));

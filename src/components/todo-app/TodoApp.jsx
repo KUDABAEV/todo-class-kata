@@ -16,6 +16,8 @@ const RenderTodoApp = ({
   changeFilterTodo,
   filter,
   countLeft,
+  changeTodoTime,
+  toggleTimer,
 }) => {
   return (
     <div className={styles.todoApp}>
@@ -31,6 +33,8 @@ const RenderTodoApp = ({
             deleteTodo={deleteTodo}
             changeTodoTitle={changeTodoTitle}
             toggleDone={toggleDone}
+            changeTodoTime={changeTodoTime}
+            toggleTimer={toggleTimer}
           />
         ))}
 
@@ -108,6 +112,38 @@ export default class TodoApp extends React.Component {
     });
   };
 
+  changeTodoTime = (id, newTime) => {
+    this.setState((prevState) => {
+      const todoList = prevState.todoList.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            timeSecond: newTime,
+          };
+        }
+        return todo;
+      });
+
+      return { todoList };
+    });
+  };
+
+  toggleTimer = (id) => {
+    this.setState((prevState) => {
+      const todoList = prevState.todoList.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            isTimerRun: !todo.isTimerRun,
+          };
+        }
+        return todo;
+      });
+
+      return { todoList };
+    });
+  };
+
   toggleDone = (id) => {
     this.setState((prevState) => {
       const todoList = prevState.todoList.map((todo) => {
@@ -140,6 +176,8 @@ export default class TodoApp extends React.Component {
         changeFilterTodo={this.changeFilterTodo}
         filter={this.state.filter}
         countLeft={this.countLeft}
+        changeTodoTime={this.changeTodoTime}
+        toggleTimer={this.toggleTimer}
       />
     );
   }
